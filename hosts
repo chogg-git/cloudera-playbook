@@ -1,13 +1,14 @@
 # Note for AWS: 'Public DNS' name is too long for ansible_host, use 'Public IP' (https://github.com/ansible/ansible/issues/11536)
 
+
 [scm_server]
-test-ansible-1	license_file=/path/to/cloudera_license.txt
+sensible-1.gce.cloudera.com	license_file=/path/to/cloudera_license.txt
 
 [db_server]
-test-ansible-1
+sensible-1.gce.cloudera.com
 
 [krb5_server]
-test-ansible-1        default_realm=CLOUDERA.COM
+sensible-1.gce.cloudera.com
 
 [utility_servers:children]
 scm_server
@@ -15,16 +16,15 @@ db_server
 krb5_server
 
 [gateway_servers]
-test-ansible-2        host_template=HostTemplate-Gateway role_ref_names=HDFS-HTTPFS-1
+sensible-1.gce.cloudera.com        host_template=HostTemplate-Gateway role_ref_names=HDFS-HTTPFS-1
 
 [master_servers]
-test-ansible-1        host_template=HostTemplate-Master1
+sensible-2.gce.cloudera.com        host_template=HostTemplate-Master1
+sensible-3.gce.cloudera.com        host_template=HostTemplate-Master2
+sensible-4.gce.cloudera.com        host_template=HostTemplate-Master3
 
 [worker_servers]
-test-ansible-2
-test-ansible-3
-test-ansible-4
-test-ansible-5
+sensible-5.gce.cloudera.com
 
 [worker_servers:vars]
 host_template=HostTemplate-Workers
@@ -36,4 +36,4 @@ master_servers
 worker_servers
 
 [all:vars]
-ansible_user=root``
+ansible_user=root

@@ -8,21 +8,12 @@ cluster_display_name: cluster_1
 
 cdh_services:
   - type: hdfs
-    dfs_data_dir_list: /dfs/dn
+    dfs_data_dir_list: /dfs/dn,/dfs/dn2,/dfs/dn3
     fs_checkpoint_dir_list: /dfs/snn
     dfs_name_dir_list: /dfs/nn
     dfs_journalnode_edits_dir: /dfs/jn
 
-  - type: hive
-
-  - type: hue
-
-  - type: impala
-    scratch_dirs: /tmp/impala
-
-  - type: oozie
-
-  - type: sentry
+  - type: hbase
 
   - type: spark
 
