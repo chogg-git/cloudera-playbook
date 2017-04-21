@@ -28,6 +28,12 @@
   when: cluster_exists == False
   delegate_to: localhost
 
+- name: Prepare cluster template 2
+  template:
+    src: "base.j2"
+    dest: "/root/cluster.json"
+  delegate_to: localhost
+
 # https://cloudera.github.io/cm_api/apidocs/v13/path__cm_importClusterTemplate.html
 - name: Import cluster template
   uri:
