@@ -1,0 +1,30 @@
+ sudo yum install postgresql-server
+sudo service postgresql initdb
+ sudo service postgresql start
+
+
+
+ sudo -u postgres psql
+ CREATE ROLE scm LOGIN PASSWORD 'scm_password';
+ CREATE DATABASE scm OWNER scm ENCODING 'UTF8';
+
+ CREATE ROLE amon LOGIN PASSWORD 'amon_password';
+ CREATE DATABASE amon OWNER amon ENCODING 'UTF8';
+
+ CREATE ROLE rman LOGIN PASSWORD 'rman_password';
+ CREATE DATABASE rman OWNER rman ENCODING 'UTF8';
+
+ CREATE ROLE hive LOGIN PASSWORD 'hive_password';
+ CREATE DATABASE metastore OWNER hive ENCODING 'UTF8';
+
+ CREATE ROLE sentry LOGIN PASSWORD 'sentry_password';
+ CREATE DATABASE sentry OWNER sentry ENCODING 'UTF8';
+ 
+ CREATE ROLE nav LOGIN PASSWORD 'nav_password';
+ CREATE DATABASE nav OWNER nav ENCODING 'UTF8';
+ CREATE ROLE navms LOGIN PASSWORD 'navms_password';
+ CREATE DATABASE navms OWNER navms ENCODING 'UTF8';
+ CREATE ROLE hue LOGIN PASSWORD 'hue_password';
+ CREATE DATABASE hue OWNER hue ENCODING 'UTF8';
+CREATE ROLE oozie LOGIN PASSWORD 'oozie_password';
+ CREATE DATABASE oozie OWNER oozie ENCODING 'UTF8';

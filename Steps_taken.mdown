@@ -1,0 +1,94 @@
+#Steps taken
+
+## Installed packages
+- yum install git -y
+-  epel
+    - wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    - yum install epel-release-latest-7.noarch.rpm 
+- yum install ansible -y
+
+- yum install net-tools
+
+
+##Setup ssh key
+- Create ssh key
+    + $ssh-keygen
+- Disttrbuted file
+    + Create a file with list of hosts
+    + add "push-key.sh" file to host with the following content
+```
+#!/bin/sh
+
+# A script to push a key to the only argument, a remote server.
+
+# Check if an argument was given.
+if [ ! "$1" ] ; then
+echo "Please specify a hostname to distribute the key to."
+exit 1
+fi
+
+# Check if all the local files are here.
+if [ ! -f ~/.ssh/id_rsa.pub ] ; then
+echo "The local file ~/.ssh/id_rsa.pub is missing. Please create it."
+exit 1
+fi
+
+# This command send the key, create a .ssh dir if required and set the
+# correct permissions.
+cat ~/.ssh/id_rsa.pub | ssh -oStrictHostKeyChecking=no -q "$1" "if [ ! -d ~/.ssh/ ] ; then mkdir ~/.ssh ; fi ; chmod 700 ~/.ssh/ ; cat - >> ~/.ssh/authorized_keys ; chmod 600 ~/.ssh/authorized_keys"
+```
+    + Run command
+        * for x in `cat hosts`; do ./push-key.sh "$x"; done
+
+## Install ansible
+- yum install ansible -y
+
+### set prequisite configuration settings
+- add to /etc/ansible/hosts
+```
+[cluster]
+hostname
+hostname
+```
+
+
+- swappiness
+    - echo "vm.swappiness = 1" >> /etc/sysctl.conf
+    - ansible cluster -m copy -a 'scr=/etc/sysctl.conf dest=/etc/sysctl.conf'
+- ntp
+    -  ansible cluster -a 'yum install ntp -y'
+    -  vi /etc/ntp.conf
+    -  chkconfig ntpd on
+    -  ansible cluster -a 'service ntpd start'
+    -  ansible cluster -a 'hwclock --systohc'
+
+
+
+## Clone git repo
+- git clone https://github.com/chogg-git/cloudera-playbook.git
+- git clone https://github.com/cloudera-ps/prereq-checks.git
+
+## Ansible configuration
+- add host to the hosts file
+    + use FQDN
+
+
+# Prepare Ansible playbook
+
+##group_vars/cdh_servers
+- This file define which services are installed on for cluster
+
+##roles/cdh/templates/host.j2
+- this file defines where the components of services are install on each host in you cluster
+
+##hosts
+- This links hosts in your cluster to roles defined in 'roles/cdh/templates/host.j2'
+
+
+## Disable kerberos 
+- In grop_vars/krb5_server
+  + set the krb5_kdc_type to none
+    +  krb5_kdc_type: none
+- Currently can not remove kerberos conpoments from site.yml or host as there is config in the playbook that realise on variables set in this section
+
+

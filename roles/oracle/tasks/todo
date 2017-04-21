@@ -1,0 +1,40 @@
+https://www.cloudera.com/documentation/enterprise/5-10-x/topics/cm_ig_oracle.html
+
+download 
+
+http://download.oracle.com/otn/utilities_drivers/jdbc/11204/ojdbc6.jar
+
+mkdir /usr/share/java
+
+cp /tmp/ojdbc6.jar /usr/share/java/oracle-connector-java.jar
+
+
+#access database
+sqlplus system@localhost
+Enter password: ******
+
+create user username identified by password;
+grant CREATE SESSION to username;
+grant CREATE ANY TABLE to username;
+grant CREATE ANY SEQUENCE to username;
+grant CREATE ANY INDEX to username;
+grant ALTER ANY TABLE to username;
+grant ALTER ANY INDEX to username;
+
+
+
+- name: Create /usr/share/java
+  file:
+    path: /usr/share/java
+    state: directory
+    mode: 0755
+
+- name: download ojdbc6.jar
+  get_url:
+    url: http://download.oracle.com/otn/utilities_drivers/jdbc/11204/ojdbc6.jar
+    dest: /usr/share/java/oracle-connector-java.jar
+    mode: 0440
+
+
+
+
