@@ -1,0 +1,14 @@
+---
+
+- hosts: localhost
+  become: true
+  tasks:
+    - name: git clone prereq-checks
+      git:
+        repo: 'https://github.com/cloudera-ps/prereq-checks.git'
+        dest: /opt/cloudera/prereq-check/
+
+    - name: run pre-requirement check
+      shell: /opt/cloudera/prereq-check/prereq-check.sh | grep 'FAIL\|FQDN'
+      register: result
+    - debug: var=result.stdout_lines
