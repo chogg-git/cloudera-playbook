@@ -1,0 +1,14 @@
+---
+
+- hosts: scm_server 
+  become: true
+  tasks:
+    - shell: echo 'never' > /sys/kernel/mm/redhat_transparent_hugepage/defrag
+
+
+- hosts: all
+  become: true
+  tasks:
+    copy:
+      src: /sys/kernel/mm/redhat_transparent_hugepage/defrag
+      dest: /sys/kernel/mm/redhat_transparent_hugepage/defrag
