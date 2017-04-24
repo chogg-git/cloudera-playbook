@@ -2,13 +2,13 @@
 
 
 [scm_server]
-test-p1-1.gce.cloudera.com	license_file=/path/to/cloudera_license.txt
+ansible-playbook-1.gce.cloudera.com	license_file=/path/to/cloudera_license.txt
 
 [db_server]
-test-p1-1.gce.cloudera.com
+ansible-playbook-1.gce.cloudera.com
 
 [krb5_server]
-test-p1-1.gce.cloudera.com
+ansible-playbook-1.gce.cloudera.com
 
 [utility_servers:children]
 scm_server
@@ -16,15 +16,15 @@ db_server
 krb5_server
 
 [gateway_servers]
-test-p1-1.gce.cloudera.com        host_template=HostTemplate-Gateway role_ref_names=HDFS-HTTPFS-1
+ansible-playbook-1.gce.cloudera.com        host_template=HostTemplate-Gateway role_ref_names=HDFS-HTTPFS-1
 
 [master_servers]
-test-p1-2.gce.cloudera.com        host_template=HostTemplate-Master1
-test-p1-3.gce.cloudera.com        host_template=HostTemplate-Master2
-test-p1-4.gce.cloudera.com        host_template=HostTemplate-Master3
+ansible-playbook-2.gce.cloudera.com        host_template=HostTemplate-Master1
+ansible-playbook-3.gce.cloudera.com        host_template=HostTemplate-Master2
+ansible-playbook-4.gce.cloudera.com        host_template=HostTemplate-Master3
 
 [worker_servers]
-test-p1-5.gce.cloudera.com
+ansible-playbook-5.gce.cloudera.com
 
 [worker_servers:vars]
 host_template=HostTemplate-Workers
