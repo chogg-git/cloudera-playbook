@@ -26,13 +26,20 @@
     }, {
       "name": "hive_service",
       "ref": "HIVE-1"
-    }, {
+    }
+    {% if ('sentry' in cdh_services) %}
+    ,{
       "name": "sentry_service",
       "ref": "SENTRY-1"
-    }, {
+    }
+    {% endif %}
+    {% if ('impala' in cdh_services) %}
+    , {
       "name": "hue_service_safety_valve",
       "value": "[impala]\nserver_port=21051\n\n[beeswax]\ndownload_cell_limit=10"
-    }, {
+    }
+    {% endif %}
+    , {
       "name": "zookeeper_service",
       "ref": "ZOOKEEPER-1"
     }, {

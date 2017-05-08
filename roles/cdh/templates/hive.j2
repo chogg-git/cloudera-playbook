@@ -26,10 +26,11 @@
     }, {
       "name": "zookeeper_service",
       "ref": "ZOOKEEPER-1"
-    }, {
+    } {% if ('sentry' in cdh_services) %} ,{
       "name": "sentry_service",
       "ref": "SENTRY-1"
     }
+    {% endif %}
   ],
   "roleConfigGroups": [
     {

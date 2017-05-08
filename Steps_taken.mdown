@@ -92,3 +92,24 @@ hostname
 - Currently can not remove kerberos conpoments from site.yml or host as there is config in the playbook that realise on variables set in this section
 
 
+- Play book
+  + ansible-playbook  -i  hosts  site.yml
+
+
+
+[root@test-p1-1 cloudera-playbook]# echo 1 > /proc/sys/vm/swappiness
+[root@test-p1-1 cloudera-playbook]# vi /proc/sys/vm/swappiness
+
+
+- Hdfs test
+  + HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /user/root
+  + HADOOP_USER_NAME=hdfs hdfs dfs -chown root:root /user/root
+  + hadoop jar  /opt/cloudera/parcels/CDH/lib/hadoop-0.20-mapreduce/hadoop-examples.jar teragen -Dmapred.map.tasks=6 -Dmapred.map.tasks.speculative.execution=false 100000000 /user/root/terasort-input
+
+
+hadoop  jar /opt/cloudera/parcels/CDH/lib/hadoop-0.20-mapreduce hadoop-examples.jar terasort -Dmapred.map.tasks=6 -Dmapred.reduce.tasks=6 -Dmapred.reduce.tasks.speculative.execution=false /user/root/terasort-input /user/root/terasort-output
+
+
+create  'measurements', {'NAME' => 'M'}
+put 'measurements', 'r1', 'M', 'value2'
+scan 'measurements'
