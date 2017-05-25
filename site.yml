@@ -1,6 +1,12 @@
 ---
 # Cloudera playbook
 
+- name: Setup Local Repository
+  hosts: local_repo_server
+  roles:
+    - { role: custom_repo, when use_local_repo == 'true' }
+  
+
 - name: Configure Cloudera Manager Repository
   hosts: cdh_servers
   roles:
@@ -53,5 +59,6 @@
   hosts: scm_server
   roles:
     - cdh
+  tags: cluster_template
   tags: cluster_template
 

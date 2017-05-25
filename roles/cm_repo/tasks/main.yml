@@ -9,3 +9,15 @@
     gpgcheck: yes
     enabled: yes
   when: (ansible_distribution|lower == "redhat") or (ansible_distribution|lower == "centos")
+  when: use_local_repo == "false"
+
+- name: Add Cloudera Manager yum local repository
+  yum_repository:
+    name: cloudera-manager-local
+    description: Cloudera Manager
+    baseurl: http://{{ local_repo_server }}:{{ local_repo_port }}{{ path.cm }}
+    gpgcheck: no
+    enabled: yes
+  when: (ansible_distribution|lower == "redhat") or (ansible_distribution|lower == "centos")
+  when: use_local_repo == "true"
+

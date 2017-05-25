@@ -1,0 +1,21 @@
+---
+# value will only be used when use_local_repo is set to true
+
+use_local_repo: false
+
+#will set up the local repo on the defined local_repo_server
+setup_local_repo: false
+
+local_repo_server: <host>
+local_repo_port: 8000
+
+
+path:
+  parcels: /cdh/parcels
+  cm: /cm
+  epel: /epel
+  kafka: /kafka
+  cm-api: /cm-api
+  jce: /jce
+
+

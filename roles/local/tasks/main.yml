@@ -1,0 +1,30 @@
+---
+
+---
+
+- hosts: {{ local_repo_server }}
+
+- name: Creates directory
+  file: path=/var/www/html/cloudera/ state=directory owner=root group=root mode=0775
+
+- find: paths="/home/ubuntu/" patterns="playbook_repos*.tar.gz"
+  register: playbook_repo
+
+- debug: msg={{ playbook_repo }}
+
+- name: Copy repository to delegated server 
+  synchronize: src="{{ playbook_dir }}/scripts/{{ playbook_repo }}" dest=/var/www/html
+  delegate_to: localhost
+
+- name: Extract repository file
+  unarchive:
+    src: "/var/www/html/playbook_repos.tar.gz"
+    dest: "/var/www/html/cloudera/"
+
+- name: Get CDH version
+  command: ls {{ playbook_dir }}/archive.cloudera.com/cdh5/parcels/ 
+  register: cdh_version_value
+
+- name: Start Cloudera Manager repository
+  shell: "(cd /var/www/html/; nohup python -m SimpleHTTPServer {{ local_repo_port }} >/dev/null 2>&1 &)"
+

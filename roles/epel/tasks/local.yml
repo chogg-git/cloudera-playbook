@@ -1,0 +1,9 @@
+---
+
+- name: Add EPEL yum repository
+  yum_repository:
+    name: epel-local
+    description: Extra Packages for Enterprise Linux $releasever
+    baseurl: http://{{ local_repo_server }}:{{ local_repo_port }}{{ path.epel }}
+    gpgcheck: no
+    enabled: yes
