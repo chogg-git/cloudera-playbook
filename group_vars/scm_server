@@ -11,7 +11,6 @@ scm_repositories:
 
 scm_products:
   - product: CDH
-    version: 5.10.1-1.cdh5.10.1.p0.10
+    version: 5.11.1-1.cdh5.11.1.p0.4
 
 
-local_repo_tar: packages/files.tar.gz 

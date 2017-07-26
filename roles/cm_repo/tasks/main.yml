@@ -1,4 +1,5 @@
 ---
+- include_vars: ../../../group_vars/local_repo_server
 
 - name: Add Cloudera Manager yum repository
   yum_repository:
@@ -19,5 +20,5 @@
     gpgcheck: no
     enabled: yes
   when: (ansible_distribution|lower == "redhat") or (ansible_distribution|lower == "centos")
-  when: use_local_repo == "true"
+  when: use_local_repo == true
 

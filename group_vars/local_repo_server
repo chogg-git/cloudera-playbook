@@ -1,21 +1,21 @@
 ---
 # value will only be used when use_local_repo is set to true
 
-use_local_repo: false
+use_local_repo: true
 
-#will set up the local repo on the defined local_repo_server
-setup_local_repo: false
+# will set up the local repo on the defined local_repo_server
+setup_local_repo: true
 
-local_repo_server: <host>
+local_repo_server: ansible-test.gce.cloudera.com
 local_repo_port: 8000
 
-
+# you may need to edit the paths if you are not using the playbook to set up the local repos.
 path:
-  parcels: /cdh/parcels
-  cm: /cm
-  epel: /epel
-  kafka: /kafka
-  cm-api: /cm-api
-  jce: /jce
+  parcels: /cloudera/parcels
+  cm: /cloudera/cm
+  epel: /cloudera/epel
+  kafka: /cloudera/kafka
+  cm-api: /cloudera/cm-api
+  jce: /cloudera/jce
 
 

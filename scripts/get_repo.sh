@@ -94,22 +94,23 @@ function sync_centos_epel() {
 
 function sync_get_jce() {
     mkdir -p $CACHE_DIR/repos/jce
-    cd $CACHE_DIR/jce
+    cd $CACHE_DIR/repos/jce
     wget -d --header="Cookie:oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jce/7/UnlimitedJCEPolicyJDK7.zip
 }
 
 function local_repo() {
+    mkdir -p $CACHE_DIR/cloudera
     cd $CACHE_DIR
     mv repos/archive.cloudera.com/cm5/redhat/$CENTOS_MAJ_VER/x86_64/cm/5 cloudera/cm
-    mv repos/archive.cloudera.com/cdh5/parcels/5.9 cloudera/parcels
-    mv repos/archive.cloudera.com/kafka/parcels/5.9 cloudera/kafka
+    mv repos/archive.cloudera.com/cdh5/parcels/$CDH_VER cloudera/parcels
+    mv repos/archive.cloudera.com/kafka/parcels/$CDH_VER cloudera/kafka
     mv repos/centos/epel cloudera/epel
     mv repos/jce cloudera/jce
 }
 
 
 function tarball_repo() {
-    tar -zcvf playbook_repos.tar.gz repos -C cloudera
+    tar -zcvf playbook_repos.tar.gz cloudera
     }
 
 echo  ${CACHE_DIR}/cloudera_repos${CENTOS_VER}_${CDH_VER}.tar.gz

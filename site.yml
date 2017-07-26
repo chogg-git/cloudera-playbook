@@ -1,10 +1,10 @@
 ---
 # Cloudera playbook
 
-- name: Setup Local Repository
-  hosts: local_repo_server
-  roles:
-    - { role: custom_repo, when use_local_repo == 'true' }
+#- name: Setup Local Repository
+#  hosts: local_repo_server
+#  roles:
+#    - { role: custom_repo, when use_local_repo == 'true' }
   
 
 - name: Configure Cloudera Manager Repository

@@ -15,15 +15,13 @@
     dest="{{ tmp_dir }}/UnlimitedJCEPolicyJDK7.zip"
     headers="Cookie:oraclelicense=accept-securebackup-cookie"
   when: jce_zip_exists.stat.exists == False
-  when: use_local_repo == 'false'
+  when: use_local_repo == false
 
 - name: Download JCE unlimited policy - local
   get_url:
-    url=http://{{ local_repo_server }}:{{ local_repo_port }}{{ path.jce }}
+    url=http://{{ local_repo_server }}:{{ local_repo_port }}{{ path.jce }}/UnlimitedJCEPolicyJDK7.zip
     dest="{{ tmp_dir }}/UnlimitedJCEPolicyJDK7.zip"
-    headers="Cookie:oraclelicense=accept-securebackup-cookie"
-  when: jce_zip_exists.stat.exists == False
-  when: use_local_repo == 'true'
+  when: use_local_repo == true
 
 - name: Unzip JCE unlimited policy files
   unarchive:
